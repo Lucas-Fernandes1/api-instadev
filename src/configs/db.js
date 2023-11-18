@@ -1,5 +1,5 @@
 require("dotenv").config();
-console.log(process.env.DB_USERNAME);
+
 module.exports = {
 	dialect: process.env.DIALECT,
 	host: process.env.HOST,
