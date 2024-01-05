@@ -1,10 +1,17 @@
 const Users = require("../models/Users");
+const {Op} = require("sequelize");
 
 class UserController {
 	async createUser(req, res) {
+
+		const {email, user_name} = req.body;
+
 		const verifyUser = await Users.findOne({
 			where: {
-				email: req.body.email
+				[Op.or]: [
+					{email},
+					{user_name}
+				]
 			}
 		});
 

@@ -1,4 +1,5 @@
 const Sequelize = require("sequelize");
+const bcryptjs = require("bcryptjs");
 const  {Model} = require ("sequelize");
 
 class Users extends Model {
@@ -19,7 +20,16 @@ class Users extends Model {
 			},
 		);
 
+		this.addHook("beforeSave", async(user) => {
+			if (user.password)	 {
+				user.password_hash = await bcryptjs.hash(user.password, 8); /* Hook que antes de salvar altera o campoo virtual*/
+			}
+		});	
 		return this;
+	}
+
+	checkPassword(password) {
+		return bcryptjs.compare(password, this.password_hash);
 	}
 }
 
