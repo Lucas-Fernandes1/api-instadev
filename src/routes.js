@@ -34,8 +34,9 @@ routes.delete("/user", UserController.deleteUser);
 
 routes.get("/user-profile", UserController.userProfile);
 
-routes.post("/new-post", schemaValidator(postSchema), PostController.createPost);
-routes.delete("/delete-post/:id", PostController.deletePost);
+routes.post("/post", schemaValidator(postSchema), PostController.createPost);
+routes.delete("/post/:id", PostController.deletePost);
+routes.put("/post/:id", PostController.updatePost);
 
 routes.post("/upload", upload.single("image"), FileController.upload);
 
