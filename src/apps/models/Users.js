@@ -1,6 +1,6 @@
-const Sequelize = require("sequelize");
+// const Sequelize = require("sequelize");
 const bcryptjs = require("bcryptjs");
-const  {Model} = require ("sequelize");
+const  {Model, Sequelize} = require ("sequelize");
 
 class Users extends Model {
 	static init(sequelize) {

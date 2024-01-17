@@ -25,15 +25,15 @@ class AuthenticationController {
 		}
 
 		if (!await user.checkPassword(password)) {
-			res.status(401).json({error: "Password does not match!"});
+			return res.status(401).json({error: "Password does not match!"});
 		}
-
+		
 		const { id, user_name: username } = user;
-
+		
 		const {iv, content} = encrypt(id);
 
 		const newId = `${iv}:${content}`;
-
+		console.log(newId);
 		const token = jwt.sign({userId: newId}, process.env.HASH_BCRYPT, {
 			expiresIn: process.env.EXPIRE_IN,
 		});

@@ -1,6 +1,6 @@
 const crypto = require("crypto");
 
-const algorithm = "aes-256-ctr";
+const algorithm = "aes-256-ctr"; //Padrão Internacional de criptografia
 const secretKey = process.env.SECRET_CRYPTO;
 const iv = crypto.randomBytes(16); //Inicialização de Vetor
 
@@ -27,7 +27,9 @@ const decrypt = hash => {
 	);
 
 	const decrypted = Buffer.concat(
-		[decipher.update(Buffer.from(text, "hex"), decipher.final())]
+		[
+			decipher.update(Buffer.from(text, "hex")), decipher.final()
+		]
 	);
 
 	return decrypted.toString();
