@@ -33,7 +33,7 @@ class AuthenticationController {
 		const {iv, content} = encrypt(id);
 
 		const newId = `${iv}:${content}`;
-		console.log(newId);
+		
 		const token = jwt.sign({userId: newId}, process.env.HASH_BCRYPT, {
 			expiresIn: process.env.EXPIRE_IN,
 		});

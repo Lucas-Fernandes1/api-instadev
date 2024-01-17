@@ -24,7 +24,6 @@ class PostController {
 		const verifyPost = await Posts.findOne({
 			where: {
 				id: id,
-				author_id: req.userId
 			}
 		});
 
