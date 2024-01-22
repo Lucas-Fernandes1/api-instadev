@@ -64,7 +64,32 @@ class PostController {
 			}
 		});
 
-		console.log(verifyPost, id);
+		if (!verifyPost) {
+			return res.status(404).json({message: "Post does not exists!"}); //404 BAD REQUEST
+		}
+
+		if (req.userId != verifyPost.author_id) {
+			return res.status(401).json({message: "You don't have permisson to alter this post!"}); //401 UNAUTHORIZED
+		}
+
+		const postUpdate = await Posts.update(req.body, {where:{id}});
+
+		if (!postUpdate) {
+			return res.status(400).json({message: "Failed to updated this post!"}); //400 BAD REQUEST
+		}
+
+		return res.status(200).json({message: "Post updated!"});
+	}
+
+	async addLike(req, res) {
+		
+		const {id} = req.params;
+
+		const verifyPost = await Posts.findOne({
+			where: {
+				id,
+			}
+		});
 
 		if (!verifyPost) {
 			return res.status(404).json({message: "Post does not exists!"}); //404 BAD REQUEST
@@ -74,14 +99,21 @@ class PostController {
 			return res.status(401).json({message: "You don't have permisson to alter this post!"}); //401 UNAUTHORIZED
 		}
 
-
-		const postUpdate = await Posts.update(req.body, {where:{id}});
+		const postUpdate = await Posts.update({
+			number_likes: verifyPost.number_likes + 1
+		}, 
+		{
+			where: {id}
+		});
 
 		if (!postUpdate) {
-			return res.status(400).json({message: "Failed to updated this post!"}); //400 BAD REQUEST
+			return res.status(400).json({message: "Failed to add like in this post!"}); //400 BAD REQUEST
 		}
 
-		return res.status(200).json({message: "Post updated!"});
+		return res.status(200).json({
+			message: "Like storaged!",
+		});
+
 	}
 
 }
