@@ -37,6 +37,7 @@ routes.get("/user-profile", UserController.userProfile);
 routes.post("/post", schemaValidator(postSchema), PostController.createPost);
 routes.delete("/post/:id", PostController.deletePost);
 routes.put("/post/:id", PostController.updatePost);
+routes.get("/list-my-posts", PostController.listMyPosts);
 
 routes.put("/add-likes/:id", PostController.addLike);
 

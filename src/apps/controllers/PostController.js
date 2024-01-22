@@ -116,6 +116,24 @@ class PostController {
 
 	}
 
+	async listMyPosts(req, res) {
+		const allPosts = await Posts.findAll({
+			where: {
+				author_id: req.userId
+			}, 
+			attributes: ["id", "image", "description", "number_likes"],
+		});
+
+		console.log(allPosts);
+
+		if (!allPosts) {
+			return res.status(400).json({message: "Faild to list all posts!"});
+		}
+
+		return res.status(200).json({data: allPosts})
+
+	}
+
 }
 
 module.exports = new PostController();
