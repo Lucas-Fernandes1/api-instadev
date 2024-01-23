@@ -31,8 +31,7 @@ routes.get("/health", (req, res) => {
 
 routes.put("/user", UserController.updateUser);
 routes.delete("/user", UserController.deleteUser);
-
-routes.get("/user-profile", UserController.userProfile);
+routes.get("/user", UserController.userProfile);
 
 routes.post("/posts", schemaValidator(postSchema), PostController.createPost);
 routes.delete("/posts/:id", PostController.deletePost);
