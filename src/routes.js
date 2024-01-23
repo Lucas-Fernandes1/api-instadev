@@ -34,14 +34,13 @@ routes.delete("/user", UserController.deleteUser);
 
 routes.get("/user-profile", UserController.userProfile);
 
-routes.post("/post", schemaValidator(postSchema), PostController.createPost);
-routes.delete("/post/:id", PostController.deletePost);
-routes.put("/post/:id", PostController.updatePost);
-routes.get("/list-my-posts", PostController.listMyPosts);
-routes.get("/all-posts", PostController.listAllPosts);
+routes.post("/posts", schemaValidator(postSchema), PostController.createPost);
+routes.delete("/posts/:id", PostController.deletePost);
+routes.put("/posts/:id", PostController.updatePost);
+routes.get("/posts", PostController.listAllPosts);
 
-
-routes.put("/add-likes/:id", PostController.addLike);
+routes.get("/posts/list-my-posts", PostController.listMyPosts);
+routes.put("/posts/add-likes/:id", PostController.addLike);
 
 routes.post("/upload", upload.single("image"), FileController.upload);
 

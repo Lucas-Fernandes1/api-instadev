@@ -126,8 +126,6 @@ class PostController {
 			attributes: ["id", "image", "description", "number_likes"],
 		});
 
-		console.log(allPosts);
-
 		if (!allPosts) {
 			return res.status(400).json({message: "Faild to list all posts!"});
 		}
