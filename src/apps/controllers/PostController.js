@@ -1,4 +1,6 @@
 const Posts = require("../models/Posts");
+const Users = require("../models/Users");
+
 class PostController {
 
 	async createPost(req, res) {
@@ -132,6 +134,21 @@ class PostController {
 
 		return res.status(200).json({data: allPosts})
 
+	}
+
+	async listAllPosts (req, res) {
+		const allPosts = await Posts.findAll({
+			attributes: ["id", "image", "description", "number_likes"],
+			include: [
+				{
+					model: Users, 
+					as: 'user',		
+					attributes: ["id", "user_name"],
+				}
+			]
+		})
+
+		return res.status(200).json({data: allPosts})
 	}
 
 }
